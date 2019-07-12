@@ -33,6 +33,7 @@ GitHubSessionListener {
     @IBOutlet weak var reportBugCell: StyledTableCell!
     @IBOutlet weak var viewSourceCell: StyledTableCell!
     @IBOutlet weak var setDefaultReaction: StyledTableCell!
+	@IBOutlet weak var setDefaultRepositoryView: StyledTableCell!
     @IBOutlet weak var signOutCell: StyledTableCell!
     @IBOutlet weak var badgeSwitch: UISwitch!
     @IBOutlet weak var badgeSettingsButton: UIButton!
@@ -115,6 +116,7 @@ GitHubSessionListener {
         case reportBugCell: onReportBug()
         case viewSourceCell: onViewSource()
         case setDefaultReaction: onSetDefaultReaction()
+		case setDefaultRepositoryView: onSetDefaultRepositoryView()
         case signOutCell: onSignOut()
         case tryTestFlightBetaCell: onTryTestFlightBeta()
         default: break
@@ -188,6 +190,15 @@ GitHubSessionListener {
         viewController.delegate = self
         route_detail(to: viewController)
     }
+
+	private func onSetDefaultRepositoryView() {
+		let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+		guard let viewController = storyboard.instantiateViewController(withIdentifier: "DefaultRepositoryViewDetailController") as? DefaultRepositoryViewDetailController else {
+			fatalError("Cannot instantiate DefaultRepositoryViewDetailController instance")
+		}
+		viewController.delegate = self
+		route_detail(to: viewController)
+	}
 
     private func onTryTestFlightBeta() {
         #if TESTFLIGHT

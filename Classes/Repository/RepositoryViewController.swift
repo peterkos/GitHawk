@@ -92,7 +92,7 @@ EmptyViewDelegate {
         navigationTitle.addTouchEffect()
         navigationItem.titleView = navigationTitle
         navigationTitle.addTarget(self, action: #selector(onNavigationTitle(sender:)), for: .touchUpInside)
-        let labelFormat = NSLocalizedString(
+        let labelFormat = NSLocalizedStrizng(
             "Repository %@ by %@",
             comment: "Accessibility label for a repository navigation item"
         )
@@ -101,6 +101,28 @@ EmptyViewDelegate {
 
         fetchDetails()
     }
+
+	override func viewDidAppear(_ animated: Bool) {
+
+		// Move to the preferred repo tab, as set in preferences
+
+		// @TODO: Make interface for user preferences
+		// @TODO: Add read/write support for said interface
+		// @TODO: Get the user preference here (through UserDefaults?)
+		// @TODO: Re-enable SwiftLint in "run script phase" lol
+
+		// For now, using hardcoded value
+		if self.buttonBarView != nil {
+			print("YEP")
+			self.buttonBarView.moveTo(index: 1, animated: true, swipeDirection: .right, pagerScroll: .scrollOnlyIfOutOfScreen)
+			self.moveToViewController(at: 1)
+		} else {
+			print("NOPE")
+		}
+
+
+
+	}
 
     // MARK: Private API
 
