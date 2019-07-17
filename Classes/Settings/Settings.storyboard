@@ -490,6 +490,7 @@
                         <outlet property="badgeSettingsButton" destination="36B-Ge-m5V" id="7Sw-oi-5Ra"/>
                         <outlet property="badgeSwitch" destination="FvK-93-raA" id="twy-bl-O1q"/>
                         <outlet property="defaultReactionLabel" destination="UHH-lU-DUe" id="ew2-Hr-5UH"/>
+                        <outlet property="defaultRepositoryViewLabel" destination="xSP-Ai-5ic" id="twN-ky-2yh"/>
                         <outlet property="githubStatusCell" destination="x9n-2O-buf" id="xc3-W3-bZW"/>
                         <outlet property="markReadSwitch" destination="8dQ-YU-Yuw" id="5jz-5d-osk"/>
                         <outlet property="openExternalLinksSwitch" destination="5on-Qc-M5n" id="Cvo-TJ-Opl"/>
@@ -515,7 +516,7 @@
         <!--Double Tap Reaction-->
         <scene sceneID="7SH-vC-PA6">
             <objects>
-                <tableViewController storyboardIdentifier="DefaultRepositoryViewDetailController" id="D6n-Kh-ydE" customClass="DefaultRepositorySectionDetailController" customModule="Freetime" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DefaultRepositoryViewDetailController" id="D6n-Kh-ydE" customClass="DefaultRepositoryViewDetailController" customModule="Freetime" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="bOV-gp-5Q9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

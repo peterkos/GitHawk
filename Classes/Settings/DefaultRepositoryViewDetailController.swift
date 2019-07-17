@@ -25,12 +25,10 @@ class DefaultRepositoryViewDetailController: UITableViewController {
 
     weak var delegate: DefaultRepositoryViewDelegate?
 
-	
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        checkCurrentDefault()
+        loadSavedRepositoryPreference()
     }
 
 	// @FIXME: Might not need this? Or just return 1
@@ -52,22 +50,18 @@ class DefaultRepositoryViewDetailController: UITableViewController {
     }
 
     // MARK: Private API
-    private func checkCurrentDefault() {
-        guard let reaction = ReactionContent.defaultReaction else {
-            enabledSwitch.isOn = false
-            return
+    private func loadSavedRepositoryPreference() {
+
+        let savedCell: UITableViewCell
+
+		switch UserDefaults.standard.defaultRepositoryView {
+        case .Overview: savedCell = overviewCell
+		case .Issues: savedCell = issuesCell
+		case .PullRequests: savedCell = pullRequestsCell
+		case .Code: savedCell = codeCell
         }
 
-        let cell: UITableViewCell
-
-		switch reaction {
-        case .thumbsUp, .__unknown: cell = thumbsUpCell
-        case .thumbsDown: cell = thumbsDownCell
-        case .laugh: cell = laughCell
-        case .hooray: cell = hoorayCell
-        }
-
-        updateCells(cell: cell)
+        updateCells(cell: savedCell)
     }
 
     private func updateCells(cell: UITableViewCell) {
@@ -81,8 +75,8 @@ class DefaultRepositoryViewDetailController: UITableViewController {
     }
 
     private func updateDefault(preferredView: PreferredRepositoryView) {
-//        UserDefaults.standard.set
-        checkCurrentDefault()
+        UserDefaults.standard.setDefault(repositoryView: preferredView)
+        loadSavedRepositoryPreference()
         delegate?.didUpdateDefaultRepositoryView()
     }
 

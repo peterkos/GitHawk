@@ -36,10 +36,10 @@ extension UserDefaults {
     }
 
 	func setDefault(repositoryView: PreferredRepositoryView) {
-		set(repositoryView, forKey: UserDefaults.defaultRepositoryViewKey)
+		set(repositoryView.rawValue, forKey: UserDefaults.defaultRepositoryViewKey)
 	}
 
-	var defaultRepositoryView: PreferredRepositoryView? {
+	var defaultRepositoryView: PreferredRepositoryView {
 
 		// If no previous view set, default to "Overview".
 		guard let value = string(forKey: UserDefaults.defaultRepositoryViewKey) else {

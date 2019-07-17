@@ -10,9 +10,13 @@ import Foundation
 
 // Raw values are intended for UserDefaults storage, as the UI is generated separately in the storyboard.
 // @TODO: Better name
-enum PreferredRepositoryView: String {
-	case Overview
-	case Issues
-	case PullRequests
-	case Code
+enum PreferredRepositoryView: String, RawRepresentable {
+	case Overview = "Overview"
+	case Issues = "Issues"
+	case PullRequests = "Pull Requests"
+	case Code = "Code"
+
+	static var defaultView: PreferredRepositoryView {
+		return UserDefaults.standard.defaultRepositoryView
+	}
 }

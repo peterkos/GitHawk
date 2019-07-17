@@ -14,6 +14,7 @@ import Squawk
 final class SettingsViewController: UITableViewController,
     NewIssueTableViewControllerDelegate,
     DefaultReactionDelegate,
+	DefaultRepositoryViewDelegate,
 GitHubSessionListener {
 
     // must be injected
@@ -44,7 +45,8 @@ GitHubSessionListener {
     @IBOutlet weak var apiStatusView: UIImageView!
     @IBOutlet weak var signatureSwitch: UISwitch!
     @IBOutlet weak var defaultReactionLabel: UILabel!
-    @IBOutlet weak var pushSwitch: UISwitch!
+	@IBOutlet weak var defaultRepositoryViewLabel: UILabel!
+	@IBOutlet weak var pushSwitch: UISwitch!
     @IBOutlet weak var pushCell: UITableViewCell!
     @IBOutlet weak var pushSettingsButton: UIButton!
     @IBOutlet weak var openExternalLinksSwitch: UISwitch!
@@ -73,7 +75,9 @@ GitHubSessionListener {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+		// Grab saved preferences for the default reaction and repository view
         updateDefaultReaction()
+		updateDefaultRepositoryView()
 
         rz_smoothlyDeselectRows(tableView: tableView)
         updateActiveAccount()
@@ -129,6 +133,14 @@ GitHubSessionListener {
         defaultReactionLabel.text = ReactionContent.defaultReaction?.emoji
             ?? NSLocalizedString("Off", comment: "")
     }
+
+	// Updates default repostiory view text in main root preferences screen
+	private func updateDefaultRepositoryView() {
+
+		// @FIXME: Alias for calling UserDefaults.standard.defaaultRepositoryView.rawValue
+		// Copying from above for consistency
+		defaultRepositoryViewLabel.text = PreferredRepositoryView.defaultView.rawValue
+	}
 
     private func onReviewAccess() {
         UIApplication.shared.openReviewAccess()
@@ -313,6 +325,11 @@ GitHubSessionListener {
     func didUpdateDefaultReaction() {
         updateDefaultReaction()
     }
+
+	// MARK: DefaultRepositoryViewDelegate
+	func didUpdateDefaultRepositoryView() {
+		updateDefaultRepositoryView()
+	}
 
     // MARK: GitHubSessionListener
 
